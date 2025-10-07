@@ -6,25 +6,69 @@
   <title>Flux Kontext Docs</title>
   <meta name="description" content="Flux Kontext AI Image Editor & Generator Documentation." />
   <link rel="canonical" href="https://fluxkontext-docs.vercel.app/" />
+
+  <!-- GitBook-like theme -->
+  <link rel="stylesheet" href="https://unpkg.com/docsify-themeable/dist/css/theme-simple.css">
+  <style>
+    :root {
+      --theme-color: #5b6bff;
+      --sidebar-width: 290px;
+      --content-max-width: 900px;
+    }
+    .topbar {
+      position: sticky; top: 0; z-index: 999;
+      background: #fff; border-bottom: 1px solid #eee;
+      padding: 10px 16px; display: flex; gap: 16px; align-items: center;
+    }
+    .topbar a { color: #333; text-decoration: none; font-weight: 600; }
+    .topbar a:hover { color: var(--theme-color); }
+    footer {
+      text-align:center; color:#777; margin: 48px 0 24px;
+      font-size: 14px;
+    }
+    .app-name-link { font-weight: 800 !important; }
+  </style>
 </head>
 <body>
+  <!-- Top navigation (works with history links) -->
+  <div class="topbar">
+    <a href="/">Overview</a>
+    <a href="/pro-vs-max">Pro vs Max</a>
+    <a href="/headshots">Headshots</a>
+    <a href="/ai-image-restoration">Restoration</a>
+    <a href="/api-integration">API</a>
+    <a href="/about">About</a>
+    <span style="flex:1"></span>
+    <a href="https://flux1kontextai.com" target="_blank" rel="noopener">Main Site ↗</a>
+  </div>
+
   <div id="app">Loading Flux Kontext Documentation...</div>
+
+  <footer>
+    Flux Kontext is developed by Black Forest Labs — read more at
+    <a href="https://flux1kontextai.com" target="_blank" rel="noopener">flux1kontextai.com</a>
+  </footer>
 
   <script>
     window.$docsify = {
       name: 'Flux Kontext Docs',
       loadSidebar: true,
       subMaxLevel: 2,
-      routerMode: 'history',
+      routerMode: 'history',     // no '#'
       auto2top: true,
+      homepage: 'docs/overview.md',  // set overview as homepage
+      // SEO: title + meta + canonical per page
       afterEach: function (html, next) {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        const h1 = tempDiv.querySelector('h1');
-        const title = h1 ? h1.innerText : 'Flux Kontext';
-        document.title = title + ' | Flux Kontext Docs';
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        const h1 = temp.querySelector('h1');
+        const firstP = temp.querySelector('p');
 
-        // canonical
+        const pageTitle = h1 ? h1.textContent.trim() : 'Flux Kontext';
+        const desc = firstP ? firstP.textContent.trim().slice(0, 160) : 'Flux Kontext AI documentation and guides.';
+
+        document.title = pageTitle + ' | Flux Kontext Docs';
+
         let canonical = document.querySelector('link[rel="canonical"]');
         if (!canonical) {
           canonical = document.createElement('link');
@@ -33,14 +77,14 @@
         }
         canonical.href = window.location.origin + window.location.pathname;
 
-        // meta description
         let meta = document.querySelector('meta[name="description"]');
         if (!meta) {
           meta = document.createElement('meta');
           meta.name = 'description';
           document.head.appendChild(meta);
         }
-        meta.content = title + ' - Learn how to use Flux Kontext AI for photo restoration, headshots, and image enhancement.';
+        meta.content = desc;
+
         next(html);
       }
     };
