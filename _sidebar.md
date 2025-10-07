@@ -1,6 +1,6 @@
 * [Overview](/)
 * [Flux Kontext Pro vs Max](pro-vs-max)
-* [AI Image Restoration Guide](restoration)
+* [AI Image Restoration Guide](ai-image-restoration)
 * [AI Headshots Creator](headshots)
-* [Developer API Integration](api)
+* [Developer API Integration](api-integration)
 * [About Flux Kontext](about)
