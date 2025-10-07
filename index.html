@@ -86,6 +86,16 @@
         meta.content = desc;
 
         next(html);
+        
+        doneEach: function() {
+  const h1 = document.querySelector('.markdown-section h1');
+  if (h1) {
+    document.title = h1.textContent + ' | Flux Kontext AI Image Editor & Generator';
+  } else {
+    document.title = 'Flux Kontext AI Image Editor & Generator';
+  }
+}
+
       }
     };
   </script>
@@ -93,5 +103,6 @@
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
 </body>
 </html>
+
 
 
