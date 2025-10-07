@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flux Kontext Docs</title>
+  <meta name="description" content="Flux Kontext AI Image Editor & Generator Documentation." />
+  <link rel="canonical" href="https://fluxkontext-docs.vercel.app/" />
+</head>
+<body>
+  <div id="app">Loading Flux Kontext Documentation...</div>
+
+  <script>
+    window.$docsify = {
+      name: 'Flux Kontext Docs',
+      loadSidebar: true,
+      subMaxLevel: 2,
+      routerMode: 'history',
+      auto2top: true,
+      afterEach: function (html, next) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        const h1 = tempDiv.querySelector('h1');
+        const title = h1 ? h1.innerText : 'Flux Kontext';
+        document.title = title + ' | Flux Kontext Docs';
+
+        // canonical
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (!canonical) {
+          canonical = document.createElement('link');
+          canonical.rel = 'canonical';
+          document.head.appendChild(canonical);
+        }
+        canonical.href = window.location.origin + window.location.pathname;
+
+        // meta description
+        let meta = document.querySelector('meta[name="description"]');
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.name = 'description';
+          document.head.appendChild(meta);
+        }
+        meta.content = title + ' - Learn how to use Flux Kontext AI for photo restoration, headshots, and image enhancement.';
+        next(html);
+      }
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+</body>
+</html>
